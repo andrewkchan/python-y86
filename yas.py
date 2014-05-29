@@ -76,7 +76,11 @@ class YAssembler:
             "pushl": "a0",
             "popl": "b0",
             "iaddl": "c0",
-            "leave": "d0"
+            "leave": "d0",
+            "rdch": "f0",
+            "wrch": "f1",
+            "rdint": "f2",
+            "wrint": "f3"
         }
         self.instbyte = {
             "nop": 1,
@@ -107,7 +111,11 @@ class YAssembler:
             "pushl": 2,
             "popl": 2,
             "iaddl": 6,
-            "leave": 1
+            "leave": 1,
+            "rdch": 8,
+            "wrch": 8,
+            "rdint": 8,
+            "wrint": 8
         }
         self.bytelen = {
             '.long': 4,
