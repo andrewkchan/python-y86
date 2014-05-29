@@ -201,7 +201,11 @@ instrname = {
     "a0": "pushl",
     "b0": "popl",
     "c0": "iaddl",
-    "d0": "leave"
+    "d0": "leave",
+    "f0": "rdch",
+    "f1": "wrch",
+    "f2": "rdint",
+    "f3": "wrint"
 }
 
 # Global variables
