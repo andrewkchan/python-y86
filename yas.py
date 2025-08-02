@@ -146,14 +146,14 @@ class YAssembler:
         return s
 
     def printError(self, error):
-        print('Error: assembly failed:\n%s' % error)
+        print(('Error: assembly failed:\n%s' % error))
         sys.exit(1)
 
     def runAssembler(self, inputName):
         try:
             fin = open(inputName)
         except IOError:
-            print('Error: cannot open input file: %s' % inputName)
+            print(('Error: cannot open input file: %s' % inputName))
             sys.exit(1)
 
         binpos = 0
@@ -365,10 +365,10 @@ class YAssembler:
                 fbout.close()
             except IOError:
                 pass
-            print('Assembled file: %s' % os.path.basename(inputName))
+            print(('Assembled file: %s' % os.path.basename(inputName)))
 
 def showUsage():
-    print('''Usage: %s [options] [assembly file]
+    print(('''Usage: %s [options] [assembly file]
 
 Options:
   -h, --help       show this help message and exit
@@ -380,11 +380,11 @@ Options:
                    1st editon rules)
   -a, --asciibin   enable conversion binary object to ASCII digits. (default
                    is disabled)
-''' % os.path.basename(sys.argv[0]))
+''' % os.path.basename(sys.argv[0])))
     sys.exit(1)
     
 def main():
-    print('Y86 Assembler %s\nCopyright (c) 2012 Linus Yang\n' % __ver__)
+    print(('Y86 Assembler %s\nCopyright (c) 2012 Linus Yang\n' % __ver__))
     largemem = True
     bigendian = False
     second = False

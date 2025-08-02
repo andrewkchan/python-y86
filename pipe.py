@@ -2,6 +2,7 @@
 #
 #    Python Pipelined Y86 Simulator
 #    Copyright (c) 2012 Linus Yang <laokongzi@gmail.com>
+#    Updated for Python3 by Andrew Chan <andrewkchan.akc@gmail.com>
 #
 #    ** Compatible with Shedskin **
 #    Shedskin is an RPython to C++ compiler
@@ -226,7 +227,7 @@ def simLog(s, onscreen = False):
     if logfile != None:
         logfile.write("%s\n" % (s))
     if onscreen or logfile == None:
-        print s
+        print(s)
 
 def writeGuiLog(s):
     if not isGuimode:
@@ -234,7 +235,7 @@ def writeGuiLog(s):
     if logfile != None:
         logfile.write("%s\n" % (s))
     else:
-        print s
+        print(s)
     
 def myHex(x, m = 0):
     if x < 0:
@@ -339,8 +340,8 @@ def stageF():
             else:
                 f_rA = RNONE
                 f_rB = RNONE
-            if (f_rA not in regname.keys() and f_rA != RNONE) or \
-                (f_rB not in regname.keys() and f_rB != RNONE):
+            if (f_rA not in list(regname.keys()) and f_rA != RNONE) or \
+                (f_rB not in list(regname.keys()) and f_rB != RNONE):
                 imem_error = True
         except:
             imem_error = True
@@ -717,7 +718,7 @@ def showStat():
             getRegName(W_dstM), W_stat))
 
 def showUsage():
-    print('''Usage: %s [options] [y86 binary object]
+    print(('''Usage: %s [options] [y86 binary object]
 
 Options:
   -h, --help            show this help message and exit
@@ -731,11 +732,11 @@ Options:
   -g, --guimode         set log output syntax for GUI. (default is disabled)
   -n, --nologfile       print log to stdout instead of writing to file.
                         (default is disabled)
-''' % os.path.basename(sys.argv[0]))
+''' % os.path.basename(sys.argv[0])))
     sys.exit(1)
     
 def main():
-    print('Pipelined Y86 Simulator %s\nCopyright (c) 2012 Linus Yang\n' % __ver__)
+    print(('Pipelined Y86 Simulator %s\nCopyright (c) 2012 Linus Yang\n' % __ver__))
     global isBigEndian
     global isSecond
     global logfile
@@ -780,7 +781,7 @@ def main():
     try:
         fin = open(inputName, 'rb')
     except:
-        print('Error: cannot open binary: %s' % inputName)
+        print(('Error: cannot open binary: %s' % inputName))
         sys.exit(1)
     if isNoLogFile:
         logfile = None
@@ -794,20 +795,20 @@ def main():
     simLog('Pipelined Y86 Simulator %s\nCopyright (c) 2012 Linus Yang\n' % __ver__)
     simLog('Y86 Object: %s' % (inputName))
     if not isNoLogFile:
-        print('Log file: %s' % (outputName))
+        print(('Log file: %s' % (outputName)))
     global yasbin
     global binlen
     global addrlen
     try:
-        yasbin = binascii.b2a_hex(fin.read())
+        yasbin = binascii.b2a_hex(fin.read()).decode('utf8')
     except:
-        print('Error: cannot identify binary: %s' % (inputName))
+        print(('Error: cannot identify binary: %s' % (inputName)))
         sys.exit(1)
     try:
         fin.close()
     except IOError:
         pass
-    binlen = len(yasbin) / 2
+    binlen = len(yasbin) // 2
     simLog('%d bytes of code read' % (binlen))
     addrlen = len("%x" % (binlen))
     if addrlen < 3:
@@ -841,7 +842,7 @@ def main():
     except:
         print('Error: bad input binary file')
         sys.exit(1)
-    simLog('\n%d instructions executed\nStatus = %s' % \
+    simLog('\n%d cycles executed\nStatus = %s' % \
            (cycle + 1, cpustat), True)
     simLog('Condition Codes: %s' % (getCCStr()), True)
     simLog('Changed Register State:', True)
