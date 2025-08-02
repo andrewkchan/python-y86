@@ -16,6 +16,16 @@ The Python Y86 assember behaves like the *CSAPP* official **"yas"** assembler, w
 The **ASCII object** ".yo" file is **fully compatible** with the *CSAPP* official "yis" or "psim" simulator and friendly to read.    
 The **binary object** ".ybo" file is generated for the pipelined simulator to execute.
 
+### Quickstart
+
+```
+# Assemble a .ys file (adding -s to specify CSAPP second edition semantics for Y86)
+./yas.py -s sum.ys
+
+# Run the assembled .ybo file in the Python pipelined simulator
+./pipe.py -s test.ybo
+```
+
 ### Features:
 - Support **all instructions** of Y86 ISA including "iaddl", "leave" and "cmovXX"
 - Support labeling and pseudo instructions, e.g. positioning by ".pos" and code alignment by ".align"
